@@ -6,13 +6,13 @@ import com.vtvhyundai.media2359demo.network.api.AppApi
 
 
 interface MovieRepository {
-    suspend fun fetchMovie(param: Any): ResultState<List<MovieModel>>
+    suspend fun fetchMovie(page: Int): ResultState<List<MovieModel>>
 }
 
 
 class MovieRepositoryImp(private val appApi: AppApi) : MovieRepository, BaseRepository() {
-    override suspend fun fetchMovie(param: Any): ResultState<List<MovieModel>> {
-        when (val response = safeApiCall { appApi.fetchMovieNowPlaying() }) {
+    override suspend fun fetchMovie(page: Int): ResultState<List<MovieModel>> {
+        when (val response = safeApiCall { appApi.fetchMovieNowPlaying(page) }) {
             is ResultState.Success -> {
                 if (response.data.results != null) {
                     return ResultState.Success(response.data.results)
