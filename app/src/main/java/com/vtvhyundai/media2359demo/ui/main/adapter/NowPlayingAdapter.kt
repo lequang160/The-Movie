@@ -72,6 +72,7 @@ class NowPlayingAdapter :
         }
     }
 
+
     fun addNewData(newData: List<MovieModel>) {
         this.data.addAll(newData as MutableList<MovieModel>)
         notifyDataSetChanged()
